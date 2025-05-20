@@ -45,7 +45,7 @@ const shoppingDetails = (id) =>{
         <div class="bg-black text-white p-4">
           <h2 class="text-3xl mb-4"><span class="font-bold ">Product name: </span>${data.title}</h2>
           <p class="text-xl mb-4"><span class="font-bold">Details: </span>${data.title}</p>
-          <button onclick="closeDetails()" class=" bg-red-500 cursor-pointer hover:text-white p-4 text-xl">Close</button>
+          <button onclick="closeDetails()" class=" bg-red-500 cursor-pointer hover:text-white p-4 text-xl font-bold">Close</button>
         </div>
         `
         detailsContainer.appendChild(div);
