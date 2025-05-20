@@ -15,20 +15,22 @@ const showProfileData = async () => {
     const data = await res.json()
     for (const user of data) {
         const div = document.createElement("div");
-        div.classList.add("border-4","bg-gray-100");
+        div.classList.add("bg-black");
         div.innerHTML = `
-            <div><img class="h-[300px] w-full p-4" src="${user.image}" alt=""></div>
-            <div class="bg-black text-white border p-4">
+            <div class="h-full">
+            <div class="h-[500px] bg-white border"><img class="h-full object-contain w-full p-4" src="${user.image}" alt=""></div>
+            <div class="relative text-white p-4">
                 <h2 class="p-2 text-3xl font-bold">${user.title}</h2>
                 <p class="p-2 text-xl">Category: ${user.category}</p>
                 <p class="p-2 text-2xl font-bold">Price: ${user.price}</p>
                 <p class="p-2 text-xl">Rating: ${user.rating.rate}</p>
                 <p class="p-2 text-xl">Review: ${user.rating.count}</p>
-                <div class="flex items-center justify-center gap-4">
+                <div class="">
                     <button onclick="addToCart(${user.id})" class="bg-green-400 cursor-pointer hover:text-white p-2 text-xl font-bold">Add to cart</button>
                     <button onclick="shoppingDetails(${user.id})" class="bg-blue-400 cursor-pointer hover:text-white p-2 text-xl font-bold">Details</button>
                 </div>
             </div>
+</div>
         `
         shoppingItems.appendChild(div);
     }
@@ -65,9 +67,11 @@ const addToCart = (id) =>{
         let priceDigit = Number(productPrice.innerHTML) + Number(data.price);
         productPrice.innerHTML = priceDigit.toFixed(2);
         deliveryCharge.innerHTML = Number(20);
-        tax.innerHTML = Number(0).toFixed(2);
+        if(Number(productPrice.innerHTML) > 200){
+            tax.innerHTML = (Number(productPrice.innerHTML)*0.2).toFixed(2);
+        }
         //total.innerHTML = Number(productPrice.innerHTML)  + Number(tax.innerHTML) + Number(deliveryCharge.innerHTML);
-        let calcTotal = Number(productPrice.innerHTML)  + Number(tax.innerHTML) + Number(deliveryCharge.innerHTML);
+        let calcTotal = Number(productPrice.innerHTML)  + Number(tax.innerHTML) + Number(deliveryCharge.innerHTML) + Number(tax.innerHTML);
         total.innerHTML = calcTotal.toFixed(2);
 
 
